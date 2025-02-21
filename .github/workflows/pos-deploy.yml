@@ -1,0 +1,55 @@
+name: POS Deployment
+
+on:
+  push:
+    paths:
+      - 'pos/**'
+    branches:
+      - main
+
+jobs:
+  build-pos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: |
+          cd pos
+          npm install
+
+      - name: Test POS App
+        run: |
+          cd pos
+          npm test
+
+    notifications:
+      - if: success()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "POS Deployment Successful"
+          to: ${{ secrets.EMAIL_RECEIVER }}
+          from: ${{ secrets.GMAIL_USERNAME }}
+          body: "POS build and tests completed successfully."
+      - if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.GMAIL_USERNAME }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "POS Deployment Failed"
+          to: ${{ secrets.EMAIL_RECEIVER }}
+          from: ${{ secrets.GMAIL_USERNAME }}
+          body: "POS deployment failed. Please review the logs for details."
