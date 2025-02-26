@@ -43,7 +43,7 @@ In your repository settings, add the following secrets:
 
 ### **Step 3: Deploy AWS Infrastructure (Terraform)**
 ```sh
-cd infrastructure
+cd terraform
 terraform init
 terraform apply -auto-approve
 ```
@@ -64,7 +64,7 @@ npm start
 
 ### **Step 6: Run the Sales Dashboard (React Web App)**
 ```sh
-cd dashboard
+cd salesDashboard
 npm install
 npm start
 ```
