@@ -105,30 +105,32 @@ resource "aws_cognito_user_pool_client" "app_client" {
 output "cognito_user_pool_id" {
   value = aws_cognito_user_pool.user_pool.id
 }
-resource "aws_lambda_function" "yoco_payment_lambda" {
-  function_name = "RetailEdgeYocoPaymentProcessor"
-  role          = aws_iam_role.lambda_role.arn
-  handler       = "payments.lambda_handler"
-  runtime       = "python3.9"
 
-  filename         = "payments.zip"
-  source_code_hash = filebase64sha256("payments.zip")
-}
 
-resource "aws_api_gateway_resource" "payments" {
-  rest_api_id = aws_api_gateway_rest_api.retail_api.id
-  parent_id   = aws_api_gateway_rest_api.retail_api.root_resource_id
-  path_part   = "payments"
-}
+#resource "aws_lambda_function" "yoco_payment_lambda" {
+# function_name = "RetailEdgeYocoPaymentProcessor"
+#  role          = aws_iam_role.lambda_role.arn
+#  handler       = "payments.lambda_handler"
+#  runtime       = "python3.9"
 
-resource "aws_api_gateway_method" "payments_post" {
-  rest_api_id   = aws_api_gateway_rest_api.retail_api.id
-  resource_id   = aws_api_gateway_resource.payments.id
-  http_method   = "POST"
-  authorization = "NONE"
-}
+#  filename         = "payments.zip"
+#  source_code_hash = filebase64sha256("payments.zip")
+#}
 
-output "payment_api_url" {
-  value = aws_api_gateway_rest_api.retail_api.endpoint
-}
+#resource "aws_api_gateway_resource" "payments" {
+#  rest_api_id = aws_api_gateway_rest_api.retail_api.id
+#  parent_id   = aws_api_gateway_rest_api.retail_api.root_resource_id
+#  path_part   = "payments"
+#}
+
+#resource "aws_api_gateway_method" "payments_post" {
+#  rest_api_id   = aws_api_gateway_rest_api.retail_api.id
+#  resource_id   = aws_api_gateway_resource.payments.id
+#  http_method   = "POST"
+#  authorization = "NONE"
+#}
+
+#output "payment_api_url" {
+#  value = aws_api_gateway_rest_api.retail_api.endpoint
+#}
 

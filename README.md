@@ -13,7 +13,7 @@ RetailEdge Lite is a scalable, cloud-based **Point of Sale (POS) and Sales Dashb
 - **Email Notifications** for deployment status via Gmail SMTP
 
 ---
-
+    
 ## **1. Prerequisites**
 - **Node.js** (v16+)
 - **AWS CLI** (configured with necessary IAM permissions)
