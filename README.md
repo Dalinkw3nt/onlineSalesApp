@@ -131,8 +131,8 @@ The deployment workflow includes:
 ---
 
 ## **8. Contributors**
-- **Your Name** - [GitHub](https://github.com/your-profile)
-- **Your Team**
+- **CN Musonda** - [GitHub](https://github.com/Dalinkw3nt)
+
 
 ---
 
